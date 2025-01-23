@@ -23,6 +23,10 @@
 # Vite
 .vite/
 
+
+*:Zone.Identifier
+
+
 # React
 /.pnp/
 /.pnp.js
