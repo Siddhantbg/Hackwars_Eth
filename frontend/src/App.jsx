@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Login from "./Login";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 
-const API_KEY = "IRI57XAY533YXUSDTU9J9TU6ZY9B4IWSRS"; 
+const API_KEY = "IRI57XAY533YXUSDTU9J9TU6ZY9B4IWSRS";
 
 const App = () => {
   const [address, setAddress] = useState("");
@@ -40,7 +42,6 @@ const App = () => {
         const balanceInEther = (response.data.result / 1e18).toFixed(4); // Convert Wei to Ether
 
         if (balanceInEther === "0.0000") {
-          // Display the balance with a warning notification
           setBalance(balanceInEther);
           toast.warn("Address is valid but has no balance.");
         } else {
@@ -48,7 +49,6 @@ const App = () => {
           toast.success("Account balance fetched successfully!");
         }
       } else {
-        // Handle cases where the address is invalid or response status is not "1"
         setError("Invalid Ethereum address or unable to fetch details.");
         setBalance(null);
         toast.error("Invalid address or unable to fetch account balance.");
@@ -68,11 +68,11 @@ const App = () => {
       if (response.data.status === "1") {
         setTransactions(response.data.result.slice(0, 10)); // Show the latest 10 transactions
       } else {
-        setTransactions([]); // If no transactions, reset to empty
+        setTransactions([]);
         toast.error("Invalid address or no transactions found.");
       }
     } catch (err) {
-      setTransactions([]); // Reset transactions
+      setTransactions([]);
       toast.error("Failed to fetch transactions. Please try again.");
     }
   };
@@ -105,9 +105,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <header>
+      <header className="header">
         <h1>TrustMaker</h1>
+        <Link to="/login">
+            <button className="login-button">Login</button>
+          </Link>
       </header>
+      
       <main>
         <section className="search">
           <input
@@ -166,6 +170,9 @@ const App = () => {
         )}
       </main>
       <ToastContainer />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 };
