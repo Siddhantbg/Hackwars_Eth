@@ -2,12 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const userRouter = require('./routes/userRoute.js');
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+// app.use(express.json());
+app.use("/api/user", userRouter);
 
 // MongoDB Connection
 mongoose
@@ -23,6 +26,16 @@ const tagSchema = new mongoose.Schema({
   address: { type: String, required: true, unique: true },
   tag: { type: String, required: true },
 });
+
+// const userSchema = new mongoose.Schema({
+//     name: { type: String, required: true },
+//     email: { type: String, required: true, unique: true },
+//     password: { type: String, required: true },
+// }, { minimize: false })
+
+// const userModel = mongoose.models.user || mongoose.model("user", userSchema);
+
+// module.exports = userModel;
 
 const Tag = mongoose.model("Tag", tagSchema);
 
@@ -64,3 +77,4 @@ app.post("/api/tag", async (req, res) => {
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
