@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  background-color: #2a5d84;
+  background-color: #101a4b;
   color: #fff;
   text-align: center;
   padding: 1rem;
@@ -33,7 +33,7 @@ input {
 button {
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #2a5d84;
+  background-color: #101a4b;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;

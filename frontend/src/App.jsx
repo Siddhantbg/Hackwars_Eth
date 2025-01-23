@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
+import Button from "./components/Button";
 
 const API_KEY = "IRI57XAY533YXUSDTU9J9TU6ZY9B4IWSRS"; 
 
@@ -116,7 +117,8 @@ const App = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
+          <br />
+          <Button onClick={handleSearch}>Search</Button>
         </section>
 
         {error && <p className="error">{error}</p>}
